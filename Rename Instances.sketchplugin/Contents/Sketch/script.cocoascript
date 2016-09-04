@@ -1,0 +1,39 @@
+var onRun = function(context) {
+    
+    var symbols = NSMutableDictionary.dictionary()
+    var instances = NSMutableDictionary.dictionary()
+    
+    var pages = context.document.pages().objectEnumerator()
+    while (item = pages.nextObject()) {
+        
+        var layers = item.layers().objectEnumerator()
+        while (item = layers.nextObject()) {
+            if (item.isMemberOfClass(MSSymbolMaster)) {
+                var itemId = item.primitiveSymbolID()
+                symbols[itemId] = item
+            } else if (item.isMemberOfClass(MSSymbolInstance)) {
+                var itemId = item.primitiveSymbolID()
+                if (instances[itemId]) {
+                    instances[itemId].addObject(item)
+                } else {
+                    instances[itemId] = NSMutableArray.array()
+                    instances[itemId].addObject(item)
+                }
+            }
+        }
+    }
+    
+    var selectedInstances = instances.allKeys().objectEnumerator()
+    while (key = selectedInstances.nextObject()) {
+        var objectLoop = instances[key].objectEnumerator()
+        while (item = objectLoop.nextObject()) {
+            item.setName(symbols[key].name())
+        }
+    }
+    
+    if (instances.count() > 0) {
+        context.document.showMessage("All instances names should now be correct")
+    } else {
+        context.document.showMessage("No instances to rename")
+    }
+};

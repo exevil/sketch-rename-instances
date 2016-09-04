@@ -1,0 +1,24 @@
+{
+  "author" : "Vyacheslav Dubovitsky",
+  "commands" : [
+    {
+      "script" : "script.cocoascript",
+      "name" : "Rename Instances",
+      "handlers" : {
+        "run" : "onRun"
+      },
+      "identifier" : "com.bohemiancoding.sketch.runscriptidentifier"
+    }
+  ],
+  "menu" : {
+    "items" : [
+      "com.bohemiancoding.sketch.runscriptidentifier"
+    ],
+    "title" : "Rename Instances"
+  },
+  "identifier" : "com.example.sketch.63197e85-ed62-4a02-8428-b86cfbe9d2e5",
+  "version" : "1.0",
+  "description" : "Renames every symbol instance with its master's name",
+  "authorEmail" : "m@dbv.ae",
+  "name" : "Rename Instances"
+}
