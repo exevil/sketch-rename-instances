@@ -5,8 +5,7 @@ var onRun = function(context) {
     
     var pages = context.document.pages().objectEnumerator()
     while (item = pages.nextObject()) {
-        
-        var layers = item.layers().objectEnumerator()
+        var layers = item.children().objectEnumerator()
         while (item = layers.nextObject()) {
             if (item.isMemberOfClass(MSSymbolMaster)) {
                 var itemId = item.primitiveSymbolID()
