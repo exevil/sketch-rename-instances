@@ -1,6 +1,6 @@
 # Rename Instances Sketch Plugin
 
-Rename Instances is a tiny single-command Sketch plugin which renames symbol instances to its master's name.
+Rename Instances is a tiny Sketch plugin which renames symbol instances to its master's name.
 
 List of commands:
 
