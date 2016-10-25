@@ -4,9 +4,9 @@ Rename Instances is a tiny single-command Sketch plugin which renames symbol ins
 
 List of commands:
 
-**— Rename All Instances** for whole document with all pages included
+* **Rename All Instances** for whole document with all pages included
+* **Rename Selected Instances** for selected instances only
 
-**— Rename Selected Instances** for selected instances only
 
 ![](http://i.dbv.ae/hMhM/2016-09-04%2022_45_51.gif)
 
