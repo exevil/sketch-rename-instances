@@ -2,17 +2,29 @@
   "author" : "Vyacheslav Dubovitsky",
   "commands" : [
     {
-      "script" : "script.cocoascript",
-      "name" : "Rename Instances",
-      "handlers" : {
-        "run" : "onRun"
-      },
-      "identifier" : "com.bohemiancoding.sketch.runscriptidentifier"
-    }
+        "script" : "script.cocoascript",
+        "name" : "Rename Selected Instances",
+        "identifier" : "renameSelected",
+        "shortcut": "cmd ctrl s",
+        "handlers" : {
+            "run" : "renameSelected"
+        }
+    },
+    {
+        "script" : "script.cocoascript",
+        "name" : "Rename All Instances",
+        "identifier" : "renameAll",
+        "shortcut": "cmd ctrl a",
+        "handlers" : {
+            "run" : "renameAll"
+        }
+    },
+
   ],
   "menu" : {
     "items" : [
-      "com.bohemiancoding.sketch.runscriptidentifier"
+        "renameSelected",
+        "renameAll"
     ],
     "title" : "Rename Instances"
   },

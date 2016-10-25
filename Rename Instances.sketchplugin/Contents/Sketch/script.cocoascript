@@ -1,4 +1,4 @@
-var onRun = function(context) {
+var renameAll = function(context) {
     
     var symbols = NSMutableDictionary.dictionary()
     var instances = NSMutableDictionary.dictionary()
@@ -19,11 +19,27 @@ var onRun = function(context) {
             }
         }
     }
+    displayResultMessage(context, renamedCount)
+}
+
+var renameSelected = function(context) {
+    var layersLoop = context.selection.objectEnumerator()
+    var renamedCount = 0
     
-    log(renamedCount)
+    while (item = layersLoop.nextObject()) {
+        if (item.isMemberOfClass(MSSymbolInstance)) {
+            item.setName(item.symbolMaster().name())
+            renamedCount += 1
+        }
+    }
+    
+    displayResultMessage(context, renamedCount)
+}
+
+function displayResultMessage(context, renamedCount) {
     if (renamedCount > 0) {
-        context.document.showMessage("All instances names should now be correct")
+        context.document.showMessage(renamedCount + " instances should now be correct")
     } else {
         context.document.showMessage("No instances to rename")
     }
-};
+}
