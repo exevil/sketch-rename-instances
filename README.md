@@ -9,7 +9,7 @@ List of commands:
 * **Rename Selected Instances** — for selected instances only
 * **Rename Instances of Selected Symbols** — for all instances of selected Symbol Masters 
 
-![](http://i.dbv.ae/iSsm/renamer.gif)
+![](http://i.dbv.ae/iS4N/renamer.gif)
 
 ## Feedback
 Your feedback is always appreciated. You can [Create an Issue](https://github.com/exevil/sketch-grid-master/issues/new) to report errors and feature requests or drop me a line directly to [m@dbv.ae](mailto:m@dbv.ae?Subject=Sketch%20Grid%20Master%20Feedback)
