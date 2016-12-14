@@ -1,44 +1,61 @@
 var renameAll = function(context) {
+    var layers = NSMutableArray.array()
     
-    var symbols = NSMutableDictionary.dictionary()
-    var instances = NSMutableDictionary.dictionary()
-    var renamedCount = 0
-    
-    var pages = context.document.pages().objectEnumerator()
-    while (item = pages.nextObject()) {
-        var layers = item.children().objectEnumerator()
-        while (item = layers.nextObject()) {
-            if (item.isMemberOfClass(MSSymbolMaster)) {
-                var instanceLoop = item.allInstances().objectEnumerator()
-                while (instance = instanceLoop.nextObject()) {
-                    if (instance.name() != item.name()) {
-                        instance.setName(item.name())
-                        renamedCount += 1
-                    }
-                }
-            }
-        }
+    var pagesLoop = context.document.pages().objectEnumerator()
+    while (item = pagesLoop.nextObject()) {
+        layers.addObjectsFromArray(item.children())
     }
-    displayResultMessage(context, renamedCount)
+    
+    var renameLayers = renameInstances(layers)
+    displayResultMessage(context, renameLayers)
 }
 
-var renameSelected = function(context) {
-    var layersLoop = context.selection.objectEnumerator()
+var renameAllOnCurrentPage = function(context) {
+    var layers = context.document.currentPage().children()
+    var renameLayers = renameInstances(layers)
+    displayResultMessage(context, renameLayers)
+}
+
+var renameSelectedInstances = function(context) {
+    var layers = context.selection
+    var renameLayers = renameInstances(layers)
+    displayResultMessage(context, renameLayers)
+}
+
+var renameInstancesOfSelectedSymbols = function(context) {
+    var layers = NSMutableArray.array()
+    var selectionLoop = context.selection.objectEnumerator()
+    
+    while (item = selectionLoop.nextObject()) {
+        if (item.isMemberOfClass(MSSymbolMaster)) {
+            layers.addObjectsFromArray(item.allInstances())
+        }
+    }
+    
+    var renameLayers = renameInstances(layers)
+    displayResultMessage(context, renameLayers)
+}
+
+function renameInstances(layers) {
+    var layersLoop = layers.objectEnumerator()
     var renamedCount = 0
     
     while (item = layersLoop.nextObject()) {
         if (item.isMemberOfClass(MSSymbolInstance)) {
-            item.setName(item.symbolMaster().name())
-            renamedCount += 1
+            if (item.name() != item.symbolMaster().name()) {
+                item.setName(item.symbolMaster().name())
+                renamedCount += 1
+            }
         }
     }
     
-    displayResultMessage(context, renamedCount)
+    return renamedCount
 }
 
 function displayResultMessage(context, renamedCount) {
     if (renamedCount > 0) {
-        context.document.showMessage(renamedCount + " instances should now be correct")
+        var instancesTitle = renamedCount == 1 ? " instance" : " instances"
+        context.document.showMessage(renamedCount + instancesTitle + " have been renamed")
     } else {
         context.document.showMessage("No instances to rename")
     }

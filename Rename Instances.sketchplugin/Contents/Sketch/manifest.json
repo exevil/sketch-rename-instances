@@ -3,33 +3,54 @@
   "commands" : [
     {
         "script" : "script.cocoascript",
-        "name" : "Rename Selected Instances",
-        "identifier" : "renameSelected",
-        "shortcut": "cmd ctrl s",
-        "handlers" : {
-            "run" : "renameSelected"
-        }
-    },
-    {
-        "script" : "script.cocoascript",
         "name" : "Rename All Instances",
         "identifier" : "renameAll",
         "shortcut": "cmd ctrl a",
         "handlers" : {
-            "run" : "renameAll"
+                "run" : "renameAll"
+        }
+    },
+    {
+        "script" : "script.cocoascript",
+        "name" : "Rename All Instances on Current Page",
+        "identifier" : "renameAllOnCurrentPage",
+        "shortcut": "cmd ctrl option a",
+        "handlers" : {
+            "run" : "renameAllOnCurrentPage"
+        }
+    },
+    {
+        "script" : "script.cocoascript",
+        "name" : "Rename Selected Instances",
+        "identifier" : "renameSelectedInstances",
+        "shortcut": "cmd ctrl s",
+        "handlers" : {
+            "run" : "renameSelectedInstances"
+        }
+    },
+    {
+        "script" : "script.cocoascript",
+        "name" : "Rename Instances of Selected Symbols",
+        "identifier" : "renameInstancesOfSelectedSymbols",
+        "shortcut": "cmd ctrl m",
+        "handlers" : {
+            "run" : "renameInstancesOfSelectedSymbols"
         }
     },
 
   ],
   "menu" : {
     "items" : [
-        "renameSelected",
-        "renameAll"
+        "renameAll",
+        "renameAllOnCurrentPage",
+        "-",
+        "renameSelectedInstances",
+        "renameInstancesOfSelectedSymbols",
     ],
     "title" : "Rename Instances"
   },
   "identifier" : "com.example.sketch.63197e85-ed62-4a02-8428-b86cfbe9d2e5",
-  "version" : "1.0",
+  "version" : "1.1",
   "description" : "Renames every symbol instance with its master's name",
   "authorEmail" : "m@dbv.ae",
   "name" : "Rename Instances"
