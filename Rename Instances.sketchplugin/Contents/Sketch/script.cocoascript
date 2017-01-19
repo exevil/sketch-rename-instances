@@ -41,7 +41,7 @@ function renameInstances(layers) {
     var renamedCount = 0
     
     while (item = layersLoop.nextObject()) {
-        if (item.isMemberOfClass(MSSymbolInstance)) {
+        if (item.isMemberOfClass(MSSymbolInstance) && item.parentSymbol() == null) {
             if (item.name() != item.symbolMaster().name()) {
                 item.setName(item.symbolMaster().name())
                 renamedCount += 1
