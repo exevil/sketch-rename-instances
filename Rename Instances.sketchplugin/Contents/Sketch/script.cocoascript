@@ -41,11 +41,13 @@ function renameInstances(layers) {
     var renamedCount = 0
     
     while (item = layersLoop.nextObject()) {
-        if (item.isMemberOfClass(MSSymbolInstance) && item.parentSymbol() == null) {
-            if (item.name() != item.symbolMaster().name()) {
-                item.setName(item.symbolMaster().name())
+        if (item.isMemberOfClass(MSSymbolInstance)
+            && item.parentSymbol() == null
+            && !item.nodeName().isEqualToString(item.symbolMaster().nodeName())
+            ) {
+                log(item)
+                item.nodeName = item.symbolMaster().nodeName()
                 renamedCount += 1
-            }
         }
     }
     
