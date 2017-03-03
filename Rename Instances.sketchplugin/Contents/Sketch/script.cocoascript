@@ -6,19 +6,19 @@ var renameAll = function(context) {
         layers.addObjectsFromArray(item.children())
     }
     
-    var renameLayers = renameInstances(layers)
+    var renameLayers = renameInstances(layers, context)
     displayResultMessage(context, renameLayers)
 }
 
 var renameAllOnCurrentPage = function(context) {
     var layers = context.document.currentPage().children()
-    var renameLayers = renameInstances(layers)
+    var renameLayers = renameInstances(layers, context)
     displayResultMessage(context, renameLayers)
 }
 
 var renameSelectedInstances = function(context) {
     var layers = context.selection
-    var renameLayers = renameInstances(layers)
+    var renameLayers = renameInstances(layers, context)
     displayResultMessage(context, renameLayers)
 }
 
@@ -32,22 +32,20 @@ var renameInstancesOfSelectedSymbols = function(context) {
         }
     }
     
-    var renameLayers = renameInstances(layers)
+    var renameLayers = renameInstances(layers, context)
     displayResultMessage(context, renameLayers)
 }
 
-function renameInstances(layers) {
+function renameInstances(layers, context) {
     var layersLoop = layers.objectEnumerator()
     var renamedCount = 0
     
     while (item = layersLoop.nextObject()) {
-        if (item.isMemberOfClass(MSSymbolInstance)
-            && item.parentSymbol() == null
-            && !item.nodeName().isEqualToString(item.symbolMaster().nodeName())
-            ) {
-                log(item)
+        if ( item.isMemberOfClass(MSSymbolInstance) && !item.nodeName().isEqualToString(item.symbolMaster().nodeName()) ) {
+            if ( item.parentSymbol() == null || item.parentPage() != context.document.documentData().symbolsPageOrCreateIfNecessary() ) {
                 item.nodeName = item.symbolMaster().nodeName()
                 renamedCount += 1
+            }
         }
     }
     
