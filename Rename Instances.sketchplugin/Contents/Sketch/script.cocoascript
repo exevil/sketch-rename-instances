@@ -56,8 +56,8 @@ function renameInstances(layers, context) {
 
 function displayResultMessage(context, renamedCount) {
     if (renamedCount > 0) {
-        var instancesTitle = renamedCount == 1 ? " instance" : " instances"
-        context.document.showMessage(renamedCount + instancesTitle + " have been renamed")
+        var instancesTitle = renamedCount == 1 ? " instance has" : " instances have"
+        context.document.showMessage(renamedCount + instancesTitle + " been renamed")
     } else {
         context.document.showMessage("No instances to rename")
     }
