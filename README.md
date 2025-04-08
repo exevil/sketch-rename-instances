@@ -1,20 +1,22 @@
 # Rename Instances Sketch Plugin
 
-Rename Instances is a tiny Sketch plugin that renames symbol instances to its master's name.
+**Rename Instances** is a tiny Sketch plugin that renames symbol instances to match their master’s name.
 
-List of commands:
+### Commands available:
 
-* **Rename All Instances** — for all instances in whole document
-* **Rename All Instances on Current Page** — for current page instances only
-* **Rename Selected Instances** — for selected instances only
-* **Rename Instances of Selected Symbols** — for all instances of selected Symbol Masters 
+- **Rename All Instances** — renames all instances in the entire document  
+- **Rename All Instances on Current Page** — renames instances only on the current page  
+- **Rename Selected Instances** — renames only the selected instances  
+- **Rename Instances of Selected Symbols** — renames all instances of the selected Symbol Masters  
 
-![](http://i.dbv.ae/iS4N/renamer.gif)
+## Project Status
+This plugin is not currently in active development. However, it's open-source and simple enough for contributions—pull requests are always welcome!
+
 
 ## Feedback
-Your feedback is always appreciated. You can [Create an Issue](https://github.com/exevil/sketch-grid-master/issues/new) to report errors and feature requests or drop me a line directly to [m@dbv.ae](mailto:m@dbv.ae?Subject=Sketch%20Grid%20Master%20Feedback)
+Your feedback is always appreciated. Feel free to [create an issue](https://github.com/exevil/sketch-grid-master/issues/new) for bugs or feature requests, or drop me a message at [m@dbv.ae](mailto:m@dbv.ae?Subject=Sketch%20Rename%20Instances%20Feedback).
 
-## Donation
-Even a small donation from your side is important. This is really motivating to see that people want to pay for your work.
+## Support
+If you find this plugin useful and would like to support its maintenance, consider using the **Sponsor** button on the repo or my profile. Every bit of support helps and is greatly appreciated!
 
-[![](https://www.paypalobjects.com/en_GB/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=evil%2emrfix%40gmail%2ecom&lc=GB&item_name=Sketch%20Plugin%20Donation&item_number=sketch%2dplugin&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)
+[![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/exevil)
