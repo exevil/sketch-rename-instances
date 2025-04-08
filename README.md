@@ -14,7 +14,7 @@ This plugin is not currently in active development. However, it's open-source an
 
 
 ## Feedback
-Your feedback is always appreciated. Feel free to [create an issue](https://github.com/exevil/sketch-grid-master/issues/new) for bugs or feature requests, or drop me a message at [m@dbv.ae](mailto:m@dbv.ae?Subject=Sketch%20Rename%20Instances%20Feedback).
+Your feedback is always appreciated. Feel free to [create an issue](https://github.com/exevil/sketch-grid-master/issues/new) for bugs or feature requests.
 
 ## Support
 If you find this plugin useful and would like to support its maintenance, consider using the **Sponsor** button on the repo or my profile. Every bit of support helps and is greatly appreciated!
