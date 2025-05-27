@@ -1,64 +1,67 @@
+const sketch = require('sketch/dom');
+const UI = require('sketch/ui');
+const Document = sketch.Document;
+const Page = sketch.Page;
+
 var renameAll = function(context) {
-    var layers = NSMutableArray.array()
-    
-    var pagesLoop = context.document.pages().objectEnumerator()
-    while (item = pagesLoop.nextObject()) {
-        layers.addObjectsFromArray(item.children())
-    }
-    
-    var renameLayers = renameInstances(layers, context)
-    displayResultMessage(context, renameLayers)
+    let document = Document.getSelectedDocument();
+    let symbolsPage = Page.getSymbolsPage(document);
+    let instances = document.pages.reduce((acc, page) => {
+        if (page.id === symbolsPage.id) {
+            return acc;
+        }
+        let instances = sketch.find("SymbolInstance", page);
+        return acc.concat(instances);
+    }, []);
+    let renamedCount = renameInstances(instances, document);
+    displayResultMessage(renamedCount);
 }
 
 var renameAllOnCurrentPage = function(context) {
-    var layers = context.document.currentPage().children()
-    var renameLayers = renameInstances(layers, context)
-    displayResultMessage(context, renameLayers)
+    let document = Document.getSelectedDocument();
+    let page = document.selectedPage;
+    let instances = sketch.find("SymbolInstance", page);
+    let renamedCount = renameInstances(instances, document);
+    displayResultMessage(renamedCount);
 }
 
 var renameSelectedInstances = function(context) {
-    var layers = context.selection
-    var renameLayers = renameInstances(layers, context)
-    displayResultMessage(context, renameLayers)
+    let document = Document.getSelectedDocument();
+    let instances = document.selectedLayers.layers.filter(layer => {
+        return layer.type === 'SymbolInstance'; 
+    })
+    let renamedCount = renameInstances(instances, document);
+    displayResultMessage(renamedCount);
 }
 
 var renameInstancesOfSelectedSymbols = function(context) {
-    var layers = NSMutableArray.array()
-    var selectionLoop = context.selection.objectEnumerator()
-    
-    while (item = selectionLoop.nextObject()) {
-        if (item.isMemberOfClass(MSSymbolMaster)) {
-            layers.addObjectsFromArray(item.allInstances())
-        }
-    }
-    
-    var renameLayers = renameInstances(layers, context)
-    displayResultMessage(context, renameLayers)
+    let document = Document.getSelectedDocument();
+    let instances = document.selectedLayers.layers.filter(layer => {
+        return layer.type === 'SymbolMaster'; 
+    }).reduce((acc, master) => {
+        return acc.concat(master.getAllInstances());
+    }, []);
+    let renamedCount = renameInstances(instances, document);
+    displayResultMessage(renamedCount);
 }
 
-function renameInstances(layers, context) {
-    var layersLoop = layers.objectEnumerator()
-    var renamedCount = 0
-    
-    while (item = layersLoop.nextObject()) {
-        if (
-            item.isMemberOfClass(MSSymbolInstance)
-            && !item.nodeName().isEqualToString(item.symbolMaster().nodeName())
-            && item.parentPage() != context.document.documentData().symbolsPageOrCreateIfNecessary()
-            ) {
-                item.nodeName = item.symbolMaster().nodeName()
-                renamedCount += 1
+function renameInstances(instances, document) {
+    let renamedCount = instances.reduce((acc, instance) => {
+        let masterName = instance.master?.name;
+        if (instance.name == masterName) {
+            return acc;
         }
-    }
-    
-    return renamedCount
+        instance.name = masterName;
+        return acc + 1;
+    }, 0);
+    return renamedCount;
 }
 
-function displayResultMessage(context, renamedCount) {
+function displayResultMessage(renamedCount) {
     if (renamedCount > 0) {
         var instancesTitle = renamedCount == 1 ? " instance has" : " instances have"
-        context.document.showMessage(renamedCount + instancesTitle + " been renamed")
+        UI.message(renamedCount + instancesTitle + " been renamed")
     } else {
-        context.document.showMessage("No instances to rename")
+        UI.message("No instances to rename")
     }
 }
